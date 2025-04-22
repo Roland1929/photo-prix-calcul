@@ -1,14 +1,12 @@
-
 import React, { useState } from 'react';
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calculator, Clock, Euro, Car, Hotel, Receipt } from 'lucide-react';
+import { Clock, Euro, Car, Hotel, Receipt } from 'lucide-react';
 
 const Index = () => {
-  const [shootingType, setShootingType] = useState<string>('portrait');
+  // Suppression de shootingType et de son useState
   const [shootingHours, setShootingHours] = useState<number>(1);
   const [postProdHours, setPostProdHours] = useState<number>(1);
   const [hourlyRate, setHourlyRate] = useState<number>(50);
@@ -23,22 +21,16 @@ const Index = () => {
   const [totalPrice, setTotalPrice] = useState<number | null>(null);
 
   const calculatePrice = () => {
-    // Calcul du coût du temps de travail
     const workTimeTotal = (shootingHours + postProdHours) * hourlyRate;
     
-    // Calcul des frais annexes
     const expenses = fuelCost + equipmentWear + tollFees + mealCost + parkingFees + hotelCost;
     
-    // Sous-total avant charges et taxes
     const subtotal = workTimeTotal + expenses;
     
-    // Calcul des charges sociales
     const socialChargesAmount = (subtotal * socialCharges) / 100;
     
-    // Calcul de la TVA si applicable
     const vatAmount = vatRate > 0 ? ((subtotal + socialChargesAmount) * vatRate) / 100 : 0;
     
-    // Total final
     const total = subtotal + socialChargesAmount + vatAmount;
     
     setTotalPrice(total);
@@ -49,7 +41,7 @@ const Index = () => {
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-2">
-            <Calculator className="h-6 w-6" />
+            <Receipt className="h-6 w-6" />
             Calculateur de Prestation Photo
           </h1>
           <p className="text-gray-600">Calculez vos tarifs en incluant tous les frais</p>
@@ -57,20 +49,7 @@ const Index = () => {
 
         <Card className="p-6 shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Type de Shooting */}
-            <div className="space-y-2">
-              <Label htmlFor="shooting-type">Type de Shooting</Label>
-              <Select value={shootingType} onValueChange={setShootingType}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Sélectionnez le type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="portrait">Portrait</SelectItem>
-                  <SelectItem value="mariage">Mariage</SelectItem>
-                  <SelectItem value="evenement">Événement</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            {/* Suppression du champ Type de Shooting */}
 
             {/* Temps de travail */}
             <div className="space-y-2">
